@@ -11,6 +11,7 @@
 		8BF7A97F218782FA00929883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BF7A97D218782FA00929883 /* Main.storyboard */; };
 		8BF7A981218782FC00929883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BF7A980218782FC00929883 /* Assets.xcassets */; };
 		8BF7A984218782FC00929883 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BF7A982218782FC00929883 /* LaunchScreen.storyboard */; };
+		8BF7A9AB2187884D00929883 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF7A9AA2187884D00929883 /* CharactersTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		8BF7A985218782FC00929883 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BF7A98A218782FC00929883 /* AssessmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssessmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BF7A995218782FC00929883 /* AssessmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssessmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BF7A9AA2187884D00929883 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,13 +89,38 @@
 		8BF7A978218782FA00929883 /* Assessment */ = {
 			isa = PBXGroup;
 			children = (
-				8BF7A979218782FA00929883 /* AppDelegate.swift */,
+				8BF7A9A9218787C500929883 /* Model */,
+				8BF7A9A8218787C200929883 /* ViewControllers */,
+				8BF7A9A7218787BB00929883 /* View */,
 				8BF7A97D218782FA00929883 /* Main.storyboard */,
 				8BF7A980218782FC00929883 /* Assets.xcassets */,
 				8BF7A982218782FC00929883 /* LaunchScreen.storyboard */,
 				8BF7A985218782FC00929883 /* Info.plist */,
 			);
 			path = Assessment;
+			sourceTree = "<group>";
+		};
+		8BF7A9A7218787BB00929883 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8BF7A9A8218787C200929883 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8BF7A979218782FA00929883 /* AppDelegate.swift */,
+				8BF7A9AA2187884D00929883 /* CharactersTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8BF7A9A9218787C500929883 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF7A97A218782FA00929883 /* AppDelegate.swift in Sources */,
+				8BF7A9AB2187884D00929883 /* CharactersTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
