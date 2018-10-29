@@ -8,7 +8,11 @@
 
 import Foundation
 
-class Character: Codable {
+class Results: Codable {
+    var results: [Character]
+}
+
+struct Character: Codable {
     let name: String
     let birthYear: String
     let gender: String
