@@ -20,5 +20,4 @@ class Character: Codable {
         case birthYear = "birth_year"
         case homeWorld = "homeworld"
     }
-    
 }

@@ -91,6 +91,7 @@
 		8BF7A978218782FA00929883 /* Assessment */ = {
 			isa = PBXGroup;
 			children = (
+				8BF7A9AE21878AC800929883 /* Networking */,
 				8BF7A9A9218787C500929883 /* Model */,
 				8BF7A9A8218787C200929883 /* ViewControllers */,
 				8BF7A9A7218787BB00929883 /* View */,
@@ -124,6 +125,13 @@
 				8BF7A9AC218788F400929883 /* Character.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8BF7A9AE21878AC800929883 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
