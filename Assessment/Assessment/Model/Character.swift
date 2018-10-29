@@ -8,6 +8,17 @@
 
 import Foundation
 
-class Character {
+class Character: Codable {
+    let name: String
+    let birthYear: String
+    let gender: String
+    let homeWorld: String
+    let species: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case name, gender, species
+        case birthYear = "birth_year"
+        case homeWorld = "homeworld"
+    }
     
 }
