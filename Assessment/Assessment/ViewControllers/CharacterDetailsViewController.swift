@@ -6,4 +6,12 @@
 //  Copyright © 2018 Flavius Bortas. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class CharacterDetailsViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
