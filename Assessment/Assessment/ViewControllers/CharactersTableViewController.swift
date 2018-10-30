@@ -75,12 +75,23 @@ extension CharactersTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let selectedCharacterHomeWorldURL = allCharacters[indexPath.row].homeWorld
+        guard let selectedCharacterSpeciesURL = allCharacters[indexPath.row].species.first else { return indexPath }
+        
+        loadData(from: selectedCharacterHomeWorldURL) { (homeWorld: HomeWorld) in
+            self.selectedCharacter?.homeWorldName = homeWorld.name
+        }
+        
+        loadData(from: selectedCharacterSpeciesURL) { (species: Species) in
+            self.selectedCharacter?.speciesName = species.name
+        }
+        
         selectedCharacter = allCharacters[indexPath.row]
         
         return indexPath
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        <#code#>
+        
     }
 }

@@ -28,8 +28,8 @@ struct Character: Codable {
     let species: [String]
     
     
-    let homeWorldName: String? = nil
-    let speciesName: String? = nil
+    var homeWorldName: String? = nil
+    var speciesName: String? = nil
     
     enum CodingKeys: String, CodingKey {
         case name, gender, species
