@@ -9,7 +9,11 @@
 import Foundation
 
 class Results: Codable {
-    var results: [Character]
+    var characters: [Character]
+}
+
+class Films: Codable {
+    var characters: [String]
 }
 
 class HomeWorld: Codable {

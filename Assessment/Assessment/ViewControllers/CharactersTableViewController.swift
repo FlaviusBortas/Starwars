@@ -13,29 +13,34 @@ class CharactersTableViewController: UITableViewController {
     //MARK: - Properties
     
     var allCharacters = [Character]()
+    var allFilms = [String]()
     var manager = NetworkManager()
     var selectedCharacter: Character?
     let queue = OperationQueue.main
-    var allCharactersURL = "https://swapi.co/api/people/"
+    var allCharactersURL = "https://swapi.co/api/films/2/"
     
     // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manager.loadData(from: allCharactersURL) { (characters: Results) in
-            for character in characters.results {
-                self.allCharacters.append(character)
-            }
-            
-            self.queue.addOperation {
-                self.tableView.reloadData()
+        manager.loadData(from: allCharactersURL) { (films: Films) in
+            for film in films.characters {
+                
+                self.manager.loadData(from: film) { (character: Character) in
+                    self.allCharacters.append(character)
+                    
+                    self.queue.addOperation {
+                        self.tableView.reloadData()
+                    }
+                }
             }
         }
     }
 }
 
 // MARK: - Table view data source
+
 extension CharactersTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allCharacters.count
@@ -50,7 +55,7 @@ extension CharactersTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-
+        
         selectedCharacter = allCharacters[indexPath.row]
         
         return indexPath
