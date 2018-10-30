@@ -39,21 +39,21 @@ class CharacterDetailsViewController: UIViewController {
             return
         }
         
-        nameLabel.text = character.name
-        birthYearLabel.text = character.birthYear
-        genderLabel.text = character.gender
+        nameLabel.text = "Name: \(character.name)"
+        birthYearLabel.text = "Birth Year: \(character.birthYear)"
+        genderLabel.text = "Gender: \(character.gender)"
         
         manager.loadData(from: character.homeWorldURL) { (homeWorld: HomeWorld) in
             
             self.queue.addOperation {
-                self.homeWorldLabel.text = homeWorld.name
+                self.homeWorldLabel.text = "Home World: \(homeWorld.name)"
             }
         }
         
         manager.loadData(from: character.speciesURL.first!) { (species: Species) in
             
             self.queue.addOperation {
-                self.speciesLabel.text = species.name
+                self.speciesLabel.text = "Species: \(species.name)"
             }
         }
     }
