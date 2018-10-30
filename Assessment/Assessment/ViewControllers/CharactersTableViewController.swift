@@ -10,11 +10,15 @@ import UIKit
 
 class CharactersTableViewController: UITableViewController {
     
+    //MARK: - Properties
+    
     var allCharacters = [Character]()
     var manager = NetworkManager()
     var selectedCharacter: Character?
+    let queue = OperationQueue.main
     var allCharactersURL = "https://swapi.co/api/people/"
     
+    // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +28,11 @@ class CharactersTableViewController: UITableViewController {
                 self.allCharacters.append(character)
             }
             
-            let queue = OperationQueue.main
-            queue.addOperation {
+            self.queue.addOperation {
                 self.tableView.reloadData()
             }
         }
     }
-    
-
 }
 
 // MARK: - Table view data source

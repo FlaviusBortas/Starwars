@@ -10,20 +10,28 @@ import UIKit
 
 class CharacterDetailsViewController: UIViewController {
     
+    //MARK: - UI Elements
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var birthYearLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var homeWorldLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
     
+    // MARK: - Properties
+    
     var manager = NetworkManager()
     var character: Character?
     let queue = OperationQueue.main
+    
+    // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUILabels()
     }
+    
+    // MARK: - Methods
     
     func loadUILabels() {
         guard let character = character else {
