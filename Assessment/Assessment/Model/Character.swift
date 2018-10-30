@@ -8,10 +8,6 @@
 
 import Foundation
 
-class Results: Codable {
-    var characters: [Character]
-}
-
 class Films: Codable {
     var characters: [String]
 }
