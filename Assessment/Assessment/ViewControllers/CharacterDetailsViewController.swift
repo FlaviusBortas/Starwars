@@ -22,11 +22,18 @@ class CharacterDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadUILabels()
+    }
+    
+    func loadUILabels() {
         guard let character = character else {
             print("No Character")
             return
         }
+        
+        nameLabel.text = character.name
+        birthYearLabel.text = character.birthYear
+        genderLabel.text = character.gender
         
         manager.loadData(from: character.homeWorldURL) { (homeWorld: HomeWorld) in
             
