@@ -11,6 +11,7 @@ import UIKit
 class CharactersTableViewController: UITableViewController {
     
     var allCharacters = [Character]()
+    var manager = NetworkManager()
     var selectedCharacter: Character?
     var allCharactersURL = "https://swapi.co/api/people/"
     
@@ -18,7 +19,7 @@ class CharactersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData(from: allCharactersURL) { (characters: Results) in
+        manager.loadData(from: allCharactersURL) { (characters: Results) in
             for character in characters.results {
                 self.allCharacters.append(character)
             }
@@ -30,34 +31,7 @@ class CharactersTableViewController: UITableViewController {
         }
     }
     
-    func loadData<T: Decodable>(from urlString: String, completion: @escaping (T) -> ()) {
-        // Create a configuration
-        let configuration = URLSessionConfiguration.ephemeral
-        
-        // Create a session
-        let session = URLSession(configuration: configuration)
-        
-        // Setup the url
-        let url = URL(string: urlString)!
-        
-        // Create the task
-        let task = session.dataTask(with: url) { (data, response, error) in
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let object = try decoder.decode(T.self, from: data)
-                
-                completion(object)
-                
-            } catch {
-                print("Error info: \(error)")
-            }
-        }
-        task.resume()
-    }
+
 }
 
 // MARK: - Table view data source
@@ -75,23 +49,22 @@ extension CharactersTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let selectedCharacterHomeWorldURL = allCharacters[indexPath.row].homeWorld
-        guard let selectedCharacterSpeciesURL = allCharacters[indexPath.row].species.first else { return indexPath }
-        
-        loadData(from: selectedCharacterHomeWorldURL) { (homeWorld: HomeWorld) in
-            self.selectedCharacter?.homeWorldName = homeWorld.name
-        }
-        
-        loadData(from: selectedCharacterSpeciesURL) { (species: Species) in
-            self.selectedCharacter?.speciesName = species.name
-        }
-        
+
         selectedCharacter = allCharacters[indexPath.row]
         
         return indexPath
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        switch segue.identifier {
+        case "CharacterDetails":
+            guard let detailsVC = segue.destination as? CharacterDetailsViewController else { print("No Segue")
+                return
+            }
+            
+            detailsVC.character = selectedCharacter
+        default:
+            print("No success on switch case.")
+        }
     }
 }
