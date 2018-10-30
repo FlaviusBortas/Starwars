@@ -22,7 +22,7 @@ class CharacterDetailsViewController: UIViewController {
     
     var manager = NetworkManager()
     var character: Character?
-    let queue = OperationQueue.main
+    let queue = DispatchQueue.main
     
     // MARK: - View LifeCycle
     
@@ -45,14 +45,14 @@ class CharacterDetailsViewController: UIViewController {
         
         manager.loadData(from: character.homeWorldURL) { (homeWorld: HomeWorld) in
             
-            self.queue.addOperation {
+            self.queue.async {
                 self.homeWorldLabel.text = "Home World: \(homeWorld.name)"
             }
         }
         
         manager.loadData(from: character.speciesURL.first!) { (species: Species) in
             
-            self.queue.addOperation {
+            self.queue.async {
                 self.speciesLabel.text = "Species: \(species.name)"
             }
         }

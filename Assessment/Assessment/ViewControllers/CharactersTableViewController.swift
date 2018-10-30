@@ -16,7 +16,7 @@ class CharactersTableViewController: UITableViewController {
     var allFilms = [String]()
     var manager = NetworkManager()
     var selectedCharacter: Character?
-    let queue = OperationQueue.main
+    let queue = DispatchQueue.main
     var allCharactersURL = "https://swapi.co/api/films/2/"
     
     // MARK: - View LifeCycle
@@ -30,7 +30,7 @@ class CharactersTableViewController: UITableViewController {
                 self.manager.loadData(from: film) { (character: Character) in
                     self.allCharacters.append(character)
                     
-                    self.queue.addOperation {
+                    self.queue.async {
                         self.tableView.reloadData()
                     }
                 }
