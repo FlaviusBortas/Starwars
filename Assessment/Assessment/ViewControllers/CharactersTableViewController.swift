@@ -11,15 +11,23 @@ import UIKit
 class CharactersTableViewController: UITableViewController {
     
     var allCharacters = [Character]()
-    
+    var allCharactersURL = "https://swapi.co/api/people/"
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadCharacters()
+        
+        loadData(from: allCharactersURL) { (characters: Results) in
+            for character in characters.results {
+                self.allCharacters.append(character)
+            }
+            
+            let queue = OperationQueue.main
+            queue.addOperation {
+                self.tableView.reloadData()
+            }
+        }
     }
     
-
     // MARK: - Table view data source
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allCharacters.count
@@ -32,48 +40,32 @@ class CharactersTableViewController: UITableViewController {
 
         return cell
     }
-
-
 }
 
 extension CharactersTableViewController {
     
-    func loadCharacters() {
-
+    func loadData<T: Decodable>(from urlString: String, completion: @escaping (T) -> ()) {
         // Create a configuration
-        
         let configuration = URLSessionConfiguration.ephemeral
         
         // Create a session
-        
         let session = URLSession(configuration: configuration)
         
         // Setup the url
-        let url = URL(string: "https://swapi.co/api/people/")!
+        let url = URL(string: urlString)!
         
         // Create the task
-        
-        let task = session.dataTask(with: url) {
-            
-            (data, response, error) in
-            
+        let task = session.dataTask(with: url) { (data, response, error) in
+
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
                 return
             }
             do {
                 let decoder = JSONDecoder()
-                let characters = try decoder.decode(Results.self, from: data)
+                let object = try decoder.decode(T.self, from: data)
                 
-                for character in characters.results {
-//                    print(character)
-                    self.allCharacters.append(character)
-                }
-                
+                completion(object)
 
-                let queue = OperationQueue.main
-                queue.addOperation {
-                    self.tableView.reloadData()
-                }
             } catch {
                 print("Error info: \(error)")
             }

@@ -12,12 +12,24 @@ class Results: Codable {
     var results: [Character]
 }
 
+struct HomeWorld: Codable {
+    let name: String
+}
+
+struct Species: Codable {
+    let name: String
+}
+
 struct Character: Codable {
     let name: String
     let birthYear: String
     let gender: String
     let homeWorld: String
     let species: [String]
+    
+    
+    let homeWorldName: String? = nil
+    let speciesName: String? = nil
     
     enum CodingKeys: String, CodingKey {
         case name, gender, species
