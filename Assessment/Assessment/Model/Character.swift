@@ -9,6 +9,7 @@
 import Foundation
 
 class Films: Codable {
+    let title: String
     var characters: [String]
 }
 
@@ -23,12 +24,19 @@ class Species: Codable {
 struct Character: Codable {
     let name: String
     let birthYear: String
+    let mass: String
     let gender: String
     let homeWorldURL: String
     let speciesURL: [String]
+    let films: [String]
+    
+    // non related API property
+    
+    var allFilmsInvolvedIn = [String]()
+    
     
     enum CodingKeys: String, CodingKey {
-        case name, gender
+        case name, gender, mass, films
         case birthYear = "birth_year"
         case homeWorldURL = "homeworld"
         case speciesURL = "species"

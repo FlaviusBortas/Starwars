@@ -28,6 +28,7 @@ class CharactersTableViewController: UITableViewController {
             for film in films.characters {
                 
                 self.manager.loadData(from: film) { (character: Character) in
+                    print(character.films)
                     self.allCharacters.append(character)
                     
                     self.queue.async {

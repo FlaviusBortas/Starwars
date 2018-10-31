@@ -17,17 +17,31 @@ class CharacterDetailsViewController: UIViewController {
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var homeWorldLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
+    @IBOutlet weak var massLabel: UILabel!
     
     // MARK: - Properties
     
-    var manager = NetworkManager()
+    private let manager = NetworkManager()
+    private let queue = DispatchQueue.main
     var character: Character?
-    let queue = DispatchQueue.main
     
     // MARK: - View LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for film in character!.films {
+            manager.loadData(from: film) { (film: Films) in
+                
+                self.character?.allFilmsInvolvedIn.append(film.title)
+                
+                print(self.character?.allFilmsInvolvedIn)
+            }
+            
+        }
+        
+        
+        
         loadUILabels()
     }
     
@@ -42,6 +56,7 @@ class CharacterDetailsViewController: UIViewController {
         nameLabel.text = "Name: \(character.name)"
         birthYearLabel.text = "Birth Year: \(character.birthYear)"
         genderLabel.text = "Gender: \(character.gender)"
+        massLabel.text = "Mass: \(character.mass)"
         
         manager.loadData(from: character.homeWorldURL) { (homeWorld: HomeWorld) in
             
