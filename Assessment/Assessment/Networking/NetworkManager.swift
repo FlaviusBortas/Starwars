@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class NetworkManager {
     
     func loadData<T: Decodable>(from urlString: String, completion: @escaping (T) -> ()) {
@@ -24,9 +23,20 @@ class NetworkManager {
         // Create the task
         let task = session.dataTask(with: url) { (data, response, error) in
             
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let data = data else {
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("status code or data failed")
                 return
             }
+            
+            if httpResponse.statusCode != 200 {
+                print(httpResponse.statusCode)
+            }
+            
+            guard let data = data else {
+                print("couldnt get data")
+                return
+            }
+            
             do {
                 let decoder = JSONDecoder()
                 let object = try decoder.decode(T.self, from: data)
