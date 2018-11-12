@@ -25,7 +25,6 @@ class NetworkManager {
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 print("status code or data failed")
-                print("added a print")
                 return
             }
             
